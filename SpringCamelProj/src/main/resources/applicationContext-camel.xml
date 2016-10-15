@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd          
+        http://camel.apache.org/schema/spring 
+        http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <bean id="processor" class="com.anhvurz90.camel2.LogProcessor"/>
+    <bean id="component" class="com.anhvurz90.camel2.Transformer"/>
+
+    <camel:camelContext>
+        <camel:route>
+            <camel:from uri="file:/home/anhvu/Desktop/camel/input?noop=true"/>
+            <camel:process ref="processor"/>      
+            <camel:bean ref="component"/>         
+            <camel:to uri="file:/home/anhvu/Desktop/camel/output"/>
+        </camel:route>
+    </camel:camelContext>
+</beans>
